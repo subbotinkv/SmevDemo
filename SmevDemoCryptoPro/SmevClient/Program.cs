@@ -11,13 +11,14 @@
             using (var client = new SmevDemoServiceClient())
             {
                 Request request = GetRequest();
+
                 try
                 {
                     client.SampleMethod(ref request.Message, ref request.MessageData);
                 }
                 catch (Exception e)
                 {
-                    FormatErrorMessage(e);
+                    Console.WriteLine(FormatErrorMessage(e));
                 }
             }
 
@@ -26,23 +27,9 @@
         }
 
         /// <summary>
-        /// Сформировать сообщение об ошибке
+        /// Сформировать тестовый запрос.
         /// </summary>
-        /// <param name="exc">Исключение</param>
-        /// <returns>Сообщение об ошибке</returns>
-        private static string FormatErrorMessage(Exception exc)
-        {
-            string errMsg = string.Empty;
-
-            while (exc != null)
-            {
-                errMsg += string.Format("Error: {0}; Type: {1}\r\n", exc.Message, exc.GetType().Name);
-                exc = exc.InnerException;
-            }
-
-            return errMsg;
-        }
-
+        /// <returns></returns>
         private static Request GetRequest()
         {
             var request = new Request();
@@ -87,6 +74,24 @@
             byte[] clientDocument = Encoding.UTF8.GetBytes("Test client document");
             request.MessageData.AppDocument.BinaryData = clientDocument;
             return request;
+        }
+
+        /// <summary>
+        /// Сформировать сообщение об ошибке.
+        /// </summary>
+        /// <param name="exc">Исключение</param>
+        /// <returns>Сообщение об ошибке</returns>
+        private static string FormatErrorMessage(Exception exc)
+        {
+            string errMsg = string.Empty;
+
+            while (exc != null)
+            {
+                errMsg += string.Format("Error: {0}; Type: {1}\r\n", exc.Message, exc.GetType().Name);
+                exc = exc.InnerException;
+            }
+
+            return errMsg;
         }
     }
 }
