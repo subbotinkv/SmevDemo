@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://smev.gosuslugi.ru/rev120315" elementFormDefault="qualified" targetNamespace="http://smev.gosuslugi.ru/rev120315" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Xml" />
+  <xs:element name="SmevDemoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Message" nillable="true" type="tns:MessageType" />
+        <xs:element minOccurs="0" name="MessageData" nillable="true" type="tns:MessageDataType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="MessageType">
+    <xs:sequence>
+      <xs:element name="Sender" nillable="true" type="tns:orgExternalType" />
+      <xs:element name="Recipient" nillable="true" type="tns:orgExternalType" />
+      <xs:element name="Originator" nillable="true" type="tns:orgExternalType" />
+      <xs:element minOccurs="0" name="TypeCode" type="tns:TypeCodeType" />
+      <xs:element minOccurs="0" name="Status" type="tns:StatusType" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ExchangeType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestIdRef" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OriginRequestIdRef" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CaseNumber" nillable="true" type="xs:string" />
+      <xs:element name="SubMessages" nillable="true" type="tns:ArrayOfSubMessage" />
+      <xs:element minOccurs="0" name="TestMsg" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OKTMO" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageType" nillable="true" type="tns:MessageType" />
+  <xs:complexType name="orgExternalType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="orgExternalType" nillable="true" type="tns:orgExternalType" />
+  <xs:simpleType name="TypeCodeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GSRV" />
+      <xs:enumeration value="GFNC" />
+      <xs:enumeration value="OTHR" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TypeCodeType" nillable="true" type="tns:TypeCodeType" />
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="REQUEST" />
+      <xs:enumeration value="RESULT" />
+      <xs:enumeration value="REJECT" />
+      <xs:enumeration value="INVALID" />
+      <xs:enumeration value="ACCEPT" />
+      <xs:enumeration value="PING" />
+      <xs:enumeration value="PROCESS" />
+      <xs:enumeration value="NOTIFY" />
+      <xs:enumeration value="FAILURE" />
+      <xs:enumeration value="CANCEL" />
+      <xs:enumeration value="STATE" />
+      <xs:enumeration value="PACKET" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StatusType" nillable="true" type="tns:StatusType" />
+  <xs:complexType name="ArrayOfSubMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SubMessage" nillable="true" type="tns:SubMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSubMessage" nillable="true" type="tns:ArrayOfSubMessage" />
+  <xs:complexType name="SubMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SubRequestNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:StatusType" />
+      <xs:element minOccurs="0" name="Originator" nillable="true" type="tns:orgExternalType" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RequestIdRef" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OriginRequestIdRef" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CaseNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubMessage" nillable="true" type="tns:SubMessage" />
+  <xs:complexType name="MessageDataType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AppData" nillable="true" type="tns:AppDataType" />
+      <xs:element minOccurs="0" name="AppDocument" nillable="true" type="tns:AppDocumentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageDataType" nillable="true" type="tns:MessageDataType" />
+  <xs:complexType name="AppDataType">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Xml" minOccurs="0" name="Any" nillable="true" type="q1:ArrayOfXmlElement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppDataType" nillable="true" type="tns:AppDataType" />
+  <xs:complexType name="AppDocumentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RequestCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BinaryData" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppDocumentType" nillable="true" type="tns:AppDocumentType" />
+  <xs:element name="SmevDemoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Message" nillable="true" type="tns:MessageType" />
+        <xs:element minOccurs="0" name="MessageData" nillable="true" type="tns:MessageDataType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmevService", "SmevService\SmevService.csproj", "{626EDF8C-977C-4013-93AE-8F9628B491F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmevClient", "SmevClient\SmevClient.csproj", "{AB4A90DD-960C-45D0-BB4A-28DE453F0763}"
+	ProjectSection(ProjectDependencies) = postProject
+		{626EDF8C-977C-4013-93AE-8F9628B491F2} = {626EDF8C-977C-4013-93AE-8F9628B491F2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
